@@ -1,10 +1,10 @@
 import * as mongoose from 'mongoose';
 
 export const UserSchema = new mongoose.Schema({
-    username: {
+    userName: {
         type: String,
         required: true,
-        trim: true,
+        trim: true,        
         index: {
             unique: true
         },

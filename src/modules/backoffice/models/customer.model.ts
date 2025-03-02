@@ -1,10 +1,17 @@
-import { Address } from './address.model';
-import { CreditCard } from './credit-card.model';
-import { Pet } from './pet.model';
-import { User } from './user.model';
-import { Type } from 'class-transformer';
 import { SerializeOptions } from '@nestjs/common';
-import {  IsEmail, IsNotEmpty, IsNumberString, IsString, MinLength, ValidateNested } from 'class-validator';
+import { Address } from 'src/modules/backoffice/models/address.model';
+import { CreditCard } from 'src/modules/backoffice/models/credit-card.model';
+import { Pet } from 'src/modules/backoffice/models/pet.model';
+import { User } from 'src/modules/backoffice/models/user.model';
+import { Type } from 'class-transformer';
+import {  
+    IsEmail, 
+    IsNotEmpty, 
+    IsNumberString, 
+    IsString, 
+    MinLength, 
+    ValidateNested 
+} from 'class-validator';
 
 @SerializeOptions({ type: Customer })
 export class Customer {
@@ -18,14 +25,14 @@ export class Customer {
         creditCard: CreditCard,
         user: User
     ) {
-        name = this.name;
-        document: this.document;
-        email: this.email;
-        pets: this.pets;
-        billingAddress: this.billingAddress;
-        shippingAddress: this.shippingAddress;
-        creditCard: this.creditCard;
-        user: this.user;
+        this.name = name;
+        this.document = document;
+        this.email = email;
+        this.pets = pets;
+        this.billingAddress = billingAddress;
+        this.shippingAddress = shippingAddress;
+        this.creditCard = creditCard;
+        this.user = user;
     }    
 
     @IsNotEmpty()

@@ -1,4 +1,9 @@
-import { IsCreditCard, IsNotEmpty, IsString, MinLength } from "class-validator";
+import { 
+    IsCreditCard, 
+    IsNotEmpty, 
+    IsString, 
+    MinLength 
+} from "class-validator";
 
 export class CreditCard {
     constructor(
@@ -6,9 +11,9 @@ export class CreditCard {
         number: string,
         expiration: string
     ){
-        holder = this.holder;
-        number: this.number;
-        expiration: this.expiration;
+        this.holder = holder;
+        this.number = number;
+        this.expiration = expiration;
     }
 
     @IsNotEmpty()

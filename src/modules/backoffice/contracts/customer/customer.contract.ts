@@ -1,10 +1,11 @@
 import { Injectable } from '@nestjs/common';
-import { Customer } from '../models/customer.models';
-import { Validator } from '../../utils/validator';
-import { Contract } from './contract';
-import { Address } from '../models/address.model';
-import { Pet } from '../models/pet.model';
-import { User } from '../models/user.model';
+import { Validator } from 'src/utils/validator';
+import { Customer } from 'src/modules/backoffice/models/customer.model';
+import { User } from 'src/modules/backoffice/models/user.model';
+import { Contract } from 'src/modules/backoffice/contracts/contract';
+import { Address } from 'src/modules/backoffice/models/address.model';
+import { Pet } from 'src/modules/backoffice/models/pet.model';
+
 
 @Injectable()
 export class CreateCustomerContract implements Contract {
@@ -13,9 +14,9 @@ export class CreateCustomerContract implements Contract {
     validate(model: Customer): boolean {
         const validator = new Validator();
 
-        validator.hasMinLen(model.name, 5, 'Inválid name! At least 5 characters are required');
-        validator.isEmail(model.email, 'Inválid e-mail!');
-        validator.isFixedLen(model.document, 11, 'Inválid CPF!');
+        validator.hasMinLen(model.name, 5, 'Invalid name! At least 5 characters are required');
+        validator.isEmail(model.email, 'Invalid e-mail!');
+        validator.isFixedLen(model.document, 11, 'Invalid CPF!');
 
         validator.isRequired(model.user, `Customer ${Object.keys(model.user)[0]} is required!`);
         if (model.user != null) this.validateUser(model.user, validator);
@@ -32,13 +33,13 @@ export class CreateCustomerContract implements Contract {
     }
 
     validateAdrress(model: Address, validator: Validator, addressType: string) {
-        validator.isZipCode(model.zipCode, `Inválid ${addressType} ZIP Code!`);
-        validator.hasMinLen(model.street, 3, `Inválid ${addressType} street! At least 3 characters are required`);
-        validator.isNumber(model.number, `Inválid ${addressType} number! Only numbers are accepted!`);
-        validator.hasMinLen(model.neighborhood, 3, `Inválid ${addressType} neighborhood! At least 3 characters are required`);
-        validator.isNotNull(model.city, `Inválid ${addressType} city! City is required!`);
-        validator.hasMinLen(model.state, 2, `Inválid ${addressType} state! State is required!`);
-        validator.hasMinLen(model.country, 2, `Inválid ${addressType} country! Country is required!`);
+        validator.isZipCode(model.zipCode, `Invalid ${addressType} ZIP Code!`);
+        validator.hasMinLen(model.street, 3, `Invalid ${addressType} street! At least 3 characters are required`);
+        validator.isNumber(model.number, `Invalid ${addressType} number! Only numbers are accepted!`);
+        validator.hasMinLen(model.neighborhood, 3, `Invalid ${addressType} neighborhood! At least 3 characters are required`);
+        validator.isNotNull(model.city, `Invalid ${addressType} city! City is required!`);
+        validator.hasMinLen(model.state, 2, `Invalid ${addressType} state! State is required!`);
+        validator.hasMinLen(model.country, 2, `Invalid ${addressType} country! Country is required!`);
     }
 
     validatePet(model: Pet, validator: Validator) {
