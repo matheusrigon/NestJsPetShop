@@ -2,8 +2,6 @@ import { Result } from 'src/modules/backoffice/models/result.model';
 import {
     Body,
     Controller,
-    Delete,
-    Get,
     HttpException,
     HttpStatus,
     Param,

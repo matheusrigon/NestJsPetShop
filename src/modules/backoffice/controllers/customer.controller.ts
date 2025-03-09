@@ -13,7 +13,6 @@ import {
     Body,
     ClassSerializerInterceptor,
     Controller,
-    Delete,
     Get,
     HttpException,
     HttpStatus,

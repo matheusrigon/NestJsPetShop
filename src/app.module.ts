@@ -1,23 +1,27 @@
 import { Module } from '@nestjs/common';
-import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
 import { BackofficeModule } from 'src/modules/backoffice/backoffice.module';
 import { StoreModule } from 'src/modules/store/store.module';
-import { DatabaseModule } from './modules/database/database.module';
-import configuration from 'configuration';
+import configuration from 'configurations/configuration';
+import mssqlConfigurations from 'configurations/mssql.configurations';
+import mongoConfigurations from 'configurations/mongo.configurations';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       envFilePath: '.env.local',
-      load: [configuration]
+      load: [
+        configuration, 
+        mssqlConfigurations, 
+        mongoConfigurations
+      ],
+      isGlobal: true
     }),
-    MongooseModule.forRoot(process.env.CONNECTION_STRING),
     BackofficeModule,
-    StoreModule,
-    DatabaseModule
+    StoreModule    
   ],
   controllers: [],
   providers: [],
+  exports: []
 })
 export class AppModule {}

@@ -1,16 +1,15 @@
-import { Injectable } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
+import { Inject, Injectable } from '@nestjs/common';
 import { Model } from 'mongoose';
 import { QueryDto } from 'src/modules/backoffice/dtos/query.dto';
 import { Customer } from 'src/modules/backoffice/models/customer.model';
 import { UpdateCustomerDto } from 'src/modules/backoffice/dtos/customer/update-customer.dto';
 import { CreditCard } from '../models/credit-card.model';
+import { CUSTOMER_MODEL } from 'src/constants';
 
 @Injectable()
 export class CustomerService{
-    constructor(@InjectModel('Customer') private readonly model: Model<Customer>){
-
-    }
+    constructor(@Inject(CUSTOMER_MODEL) private readonly model: Model<Customer>) 
+    { }
 
     async create(data: Customer): Promise<Customer>{
         const customer = new this.model(data);
